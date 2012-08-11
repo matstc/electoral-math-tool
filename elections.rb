@@ -24,8 +24,9 @@ class Elections
     }.find_all{|v| !v.nil?}.sort.reverse
   end
 
-  def results margin=2
+  def results margin=4
     hashes = parse
+    puts "Parsed #{hashes.size} ridings"
     winners = hashes.map{|h| 
       ordered = h.sort_by{|k,v| if is_number?(v); 0 - v.to_f; else; 0; end}
       if ordered[0][1].to_f - ordered[1][1].to_f < margin
